@@ -287,7 +287,7 @@
   <h2>🐾 Gratta e scopri la sorpresa</h2>
   <div class="scratch-wrap" id="scratchWrap">
     <img id="fotoNascosta"
-         src="https://picsum.photos/id/1015/1200/800"
+         src="foto.png"
          alt="Foto nascosta da grattare" />
     <canvas id="scratchCanvas"></canvas>
   </div>
@@ -305,11 +305,8 @@
 // ✅ VIDEO SHORTS già inserito
 const YOUTUBE_LINK = "https://youtube.com/shorts/hu-rdhDUFEc";
 
-// ⬇️ QUI METTERAI IL LINK DELLA FOTO (per ora è un placeholder)
-// Esempi:
-//   "foto.jpg"  (se carichi la foto nella stessa cartella su GitHub)
-//   "https://raw.githubusercontent.com/TUO-USER/repo/main/foto.jpg"
-const FOTO_URL = "https://picsum.photos/id/1015/1200/800";
+// ✅ FOTO: cerca "foto.png" nella stessa cartella dell'HTML
+const FOTO_URL = "foto.png";
 
 /* =========================================================
    2) LOGICA — non serve modificare
@@ -333,7 +330,14 @@ if (isShort){
 }
 
 // --- Foto ---
-document.getElementById("fotoNascosta").src = FOTO_URL;
+const imgFoto = document.getElementById("fotoNascosta");
+imgFoto.src = FOTO_URL;
+
+// Fallback se "foto.png" non esiste ancora
+imgFoto.onerror = () => {
+  console.warn("⚠️ foto.png non trovata! Carica il file 'foto.png' nella stessa cartella dell'index.html");
+  imgFoto.src = "https://picsum.photos/id/1015/1200/800"; // placeholder temporaneo
+};
 
 // --- Gratta e vinci ---
 const wrap   = document.getElementById("scratchWrap");
@@ -495,7 +499,7 @@ canvas.addEventListener("pointermove", (e) => {
   ultimoPunto = p;
 
   if (++contatoreControlli % 10 === 0 && percentualeGrattata() > SOGLIA_RIVELAZIONE){
-    rivelaTutto();
+    rivelato || rivelaTutto();
   }
 });
 
