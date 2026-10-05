@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tanti auguri patata! 🎂</title>
+<style>
+  :root{
+    --bg:#1a0d1f;
+    --card:#2a1530;
+    --text:#fff5fb;
+    --muted:#e2b8d6;
+    --accent:#ff4d9e;
+    --accent2:#ffd166;
+    --accent3:#a06cff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:"Comic Sans MS", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 20% -10%, #4a1b5a, transparent),
+      radial-gradient(1000px 700px at 90% 10%, #6b2b8a, transparent),
+      radial-gradient(900px 500px at 50% 100%, #2d0f3d, transparent),
+      var(--bg);
+    color:var(--text);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px 80px;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* Coriandoli decorativi animati */
+  .confetti{
+    position:fixed;
+    top:-20px;
+    font-size:1.4rem;
+    animation: cade linear infinite;
+    pointer-events:none;
+    z-index:0;
+    opacity:.85;
+  }
+  @keyframes cade{
+    0%{transform:translateY(-20px) rotate(0deg); opacity:0}
+    10%{opacity:.9}
+    100%{transform:translateY(105vh) rotate(720deg); opacity:0}
+  }
+
+  header{text-align:center;max-width:760px;margin-bottom:36px;position:relative;z-index:1}
+  h1{
+    font-size:clamp(1.8rem,5vw,3rem);
+    margin:0 0 12px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 30px rgba(255,77,158,.35);
+    animation:pulsa 2.5s ease-in-out infinite;
+  }
+  @keyframes pulsa{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.04)}
+  }
+  header p{color:var(--muted);margin:0;line-height:1.6;font-size:1.05rem}
+  .patata{display:inline-block;animation:salta 1.2s ease-in-out infinite}
+  @keyframes salta{
+    0%,100%{transform:translateY(0) rotate(-6deg)}
+    50%{transform:translateY(-8px) rotate(6deg)}
+  }
+
+  .card{
+    width:min(900px,100%);
+    background:linear-gradient(160deg, rgba(255,77,158,.09), rgba(160,108,255,.09));
+    border:2px dashed rgba(255,209,102,.35);
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.55), 0 0 40px rgba(160,108,255,.15) inset;
+    margin-bottom:44px;
+    position:relative;
+    z-index:1;
+    backdrop-filter:blur(6px);
+  }
+  h2{
+    font-size:1.2rem;
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--accent2);
+  }
+
+  /* --- Video --- */
+  .video-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:14px;
+    overflow:hidden;
+    background:#000;
+    border:3px solid var(--accent);
+    box-shadow:0 0 30px rgba(255,77,158,.45);
+  }
+  .video-wrap iframe{
+    position:absolute;inset:0;
+    width:100%;height:100%;border:0;
+  }
+
+  /* --- Gratta e vinci --- */
+  .scratch-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:3/2;
+    border-radius:16px;
+    overflow:hidden;
+    background:#000;
+    user-select:none;
+    -webkit-user-select:none;
+    border:3px solid var(--accent3);
+    box-shadow:0 0 30px rgba(160,108,255,.45);
+  }
+  .scratch-wrap img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+    pointer-events:none;
+  }
+  #scratchCanvas{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    cursor:crosshair;
+    touch-action:none;
+    transition:opacity .6s ease;
+  }
+  .hint{color:var(--muted);font-size:.95rem;margin:12px 0 0;text-align:center}
+
+  .btn{
+    margin-top:16px;
+    background:linear-gradient(90deg,var(--accent),var(--accent3));
+    color:#fff;border:0;
+    padding:12px 22px;border-radius:12px;
+    font-size:1rem;font-weight:700;cursor:pointer;
+    font-family:inherit;
+    box-shadow:0 8px 24px rgba(255,77,158,.4);
+    transition:transform .15s, filter .2s;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+  .btn:active{transform:translateY(1px)}
+
+  /* Palloncini decorativi ai lati */
+  .palloncino{
+    position:fixed;
+    font-size:2.4rem;
+    animation:fluttua 4s ease-in-out infinite;
+    pointer-events:none;
+    z-index:0;
+    opacity:.75;
+  }
+  @keyframes fluttua{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-25px)}
+  }
+
+  .firma{
+    margin-top:20px;
+    color:var(--muted);
+    font-size:.9rem;
+    text-align:center;
+    position:relative;
+    z-index:1;
+  }
+</style>
+</head>
+<body>
+
+<!-- Decorazioni: coriandoli e palloncini -->
+<span class="confetti" style="left:5%;  animation-duration:6s;   animation-delay:0s">🎉</span>
+<span class="confetti" style="left:18%; animation-duration:8s;   animation-delay:1s">🎊</span>
+<span class="confetti" style="left:32%; animation-duration:7s;   animation-delay:2s">🎈</span>
+<span class="confetti" style="left:47%; animation-duration:9s;   animation-delay:0.5s">🎉</span>
+<span class="confetti" style="left:63%; animation-duration:6.5s; animation-delay:3s">🎂</span>
+<span class="confetti" style="left:78%; animation-duration:8.5s; animation-delay:1.5s">🎊</span>
+<span class="confetti" style="left:92%; animation-duration:7.5s; animation-delay:2.5s">🎈</span>
+
+<span class="palloncino" style="left:3%;  top:20%; animation-delay:0s">🎈</span>
+<span class="palloncino" style="right:3%; top:30%; animation-delay:1.5s">🎈</span>
+
+<header>
+  <h1>Tanti auguri patata! <span class="patata">🥔</span>🎂</h1>
+  <p>Buon compleanno! Guarda il video e gratta la sorpresa per scoprire la foto nascosta. 🎁</p>
+</header>
+
+<!-- ============ VIDEO YOUTUBE ============ -->
+<section class="card">
+  <h2>▶️ Il tuo video</h2>
+  <div class="video-wrap">
+    <iframe
+      id="ytFrame"
+      src=""
+      title="Video YouTube"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- ============ GRATTA E VINCI ============ -->
+<section class="card">
+  <h2>🎟️ Gratta e scopri la sorpresa</h2>
+  <div class="scratch-wrap" id="scratchWrap">
+    <!-- Sostituisci il src con la tua foto -->
+    <img id="fotoNascosta"
+         src="https://picsum.photos/id/1015/1200/800"
+         alt="Foto nascosta da grattare" />
+    <canvas id="scratchCanvas"></canvas>
+  </div>
+  <p class="hint">Gratta con il mouse o con il dito: quando avrai scoperto abbastanza, la foto si rivelerà da sola. ✨</p>
+  <button class="btn" id="resetBtn">🔄 Ricomincia a grattare</button>
+</section>
+
+<p class="firma">Fatto con ❤️ per la patata più dolce del mondo 🥔💖</p>
+
+<script>
+/* =========================================================
+   1) CONFIGURAZIONE — MODIFICA SOLO QUESTE DUE RIGHE
+   ========================================================= */
+
+// ⬇️ INCOLLA QUI IL LINK DEL TUO VIDEO YOUTUBE
+// (va bene qualsiasi formato: watch?v=..., youtu.be/..., shorts/..., oppure solo l'ID)
+const YOUTUBE_LINK = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+// ⬇️ URL DELLA FOTO DA NASCONDERE (puoi usare una tua immagine locale, es. "foto.jpg")
+const FOTO_URL = "https://picsum.photos/id/1015/1200/800";
+
+/* =========================================================
+   2) LOGICA — di solito non serve modificare nulla qui sotto
+   ========================================================= */
+
+// --- Video ---
+function estraiYouTubeId(input){
+  const s = (input || "").trim();
+  const m = s.match(/(?:youtu\.be\/|v=|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/);
+  if (m) return m[1];
+  return /^[A-Za-z0-9_-]{11}$/.test(s) ? s : "";
+}
+const videoId = estraiYouTubeId(YOUTUBE_LINK);
+document.getElementById("ytFrame").src =
+  videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0` : "";
+
+// --- Foto ---
+document.getElementById("fotoNascosta").src = FOTO_URL;
+
+// --- Gratta e vinci ---
+const wrap   = document.getElementById("scratchWrap");
+const canvas = document.getElementById("scratchCanvas");
+const ctx    = canvas.getContext("2d", { willReadFrequently: true });
+
+let disegnando = false;
+let ultimoPunto = null;
+let rivelato = false;
+let contatoreControlli = 0;
+let larghezzaCSS = 0, altezzaCSS = 0;
+
+const SOGLIA_RIVELAZIONE = 0.55;
+const RAGGIO_PENNELLO = 24;
+
+// Testi/emoji dello strato argentato (a tema compleanno)
+const EMOJI_STRATO = ["🎂", "🎈", "🎉", "🎁", "🥔", "💖", "✨"];
+
+function initCanvas(){
+  const rect = wrap.getBoundingClientRect();
+  larghezzaCSS = rect.width;
+  altezzaCSS  = rect.height;
+
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width  = Math.round(larghezzaCSS * dpr);
+  canvas.height = Math.round(altezzaCSS * dpr);
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.globalCompositeOperation = "source-over";
+  ctx.clearRect(0, 0, larghezzaCSS, altezzaCSS);
+
+  // Sfondo argentato con gradiente rosa/viola
+  const grad = ctx.createLinearGradient(0, 0, larghezzaCSS, altezzaCSS);
+  grad.addColorStop(0,    "#ffb3d9");
+  grad.addColorStop(0.3,  "#c9a8ff");
+  grad.addColorStop(0.5,  "#ffe4f3");
+  grad.addColorStop(0.7,  "#ffb3d9");
+  grad.addColorStop(1,    "#a06cff");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, larghezzaCSS, altezzaCSS);
+
+  // Riflessi diagonali argento
+  ctx.save();
+  ctx.globalAlpha = 0.22;
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 12;
+  for (let x = -altezzaCSS; x < larghezzaCSS; x += 36){
+    ctx.beginPath();
+    ctx.moveTo(x, altezzaCSS);
+    ctx.lineTo(x + altezzaCSS, 0);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Emoji decorative sparse
+  ctx.save();
+  ctx.globalAlpha = 0.55;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  const dim = Math.min(larghezzaCSS, altezzaCSS);
+  const fontEmoji = Math.max(20, dim * 0.12);
+  ctx.font = `${fontEmoji}px serif`;
+  const cols = Math.max(4, Math.floor(larghezzaCSS / (fontEmoji * 1.6)));
+  const rows = Math.max(3, Math.floor(altezzaCSS  / (fontEmoji * 1.6)));
+  for (let r = 0; r < rows; r++){
+    for (let c = 0; c < cols; c++){
+      const e = EMOJI_STRATO[(r * cols + c) % EMOJI_STRATO.length];
+      const px = (c + 0.5) * (larghezzaCSS / cols);
+      const py = (r + 0.5) * (altezzaCSS  / rows);
+      ctx.fillText(e, px, py);
+    }
+  }
+  ctx.restore();
+
+  // Scritta centrale
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  const fontSize = Math.max(18, dim * 0.1);
+  ctx.font = `900 ${fontSize}px "Comic Sans MS", system-ui, sans-serif`;
+
+  // Ombra
+  ctx.fillStyle = "rgba(80,20,60,.55)";
+  ctx.fillText("Tanti auguri patata! 🥔", larghezzaCSS / 2 + 2, altezzaCSS / 2 + 2);
+
+  // Testo
+  const tg = ctx.createLinearGradient(0, altezzaCSS / 2 - fontSize, larghezzaCSS, altezzaCSS / 2 + fontSize);
+  tg.addColorStop(0, "#ffffff");
+  tg.addColorStop(0.5, "#ffd166");
+  tg.addColorStop(1, "#ff4d9e");
+  ctx.fillStyle = tg;
+  ctx.fillText("Tanti auguri patata! 🥔", larghezzaCSS / 2, altezzaCSS / 2);
+
+  ctx.font = `700 ${fontSize * 0.5}px "Comic Sans MS", system-ui, sans-serif`;
+  ctx.fillStyle = "rgba(255,255,255,.9)";
+  ctx.fillText("✨ gratta qui ✨", larghezzaCSS / 2, altezzaCSS / 2 + fontSize * 1.1);
+
+  ctx.restore();
+
+  canvas.style.opacity = "1";
+  canvas.style.pointerEvents = "auto";
+}
+
+function gratta(x0, y0, x1, y1){
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.lineWidth = RAGGIO_PENNELLO * 2;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  ctx.moveTo(x0, y0);
+  ctx.lineTo(x1, y1);
+  ctx.stroke();
+}
+
+function percentualeGrattata(){
+  const dati = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  let trasparenti = 0, totali = 0;
+  for (let i = 3; i < dati.length; i += 4 * 8){
+    totali++;
+    if (dati[i] < 40) trasparenti++;
+  }
+  return totali ? trasparenti / totali : 0;
+}
+
+function rivelaTutto(){
+  if (rivelato) return;
+  rivelato = true;
+  canvas.style.opacity = "0";
+  canvas.style.pointerEvents = "none";
+  // Piccola esplosione di coriandoli virtuali
+  for (let i = 0; i < 8; i++){
+    const s = document.createElement("span");
+    s.className = "confetti";
+    s.textContent = ["🎉","🎊","🎈","🎂","💖","✨"][i % 6];
+    s.style.left = (Math.random() * 90 + 5) + "%";
+    s.style.animationDuration = (4 + Math.random() * 3) + "s";
+    s.style.animationDelay = (Math.random() * 0.6) + "s";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 8000);
+  }
+}
+
+function posizione(e){
+  const r = canvas.getBoundingClientRect();
+  return { x: e.clientX - r.left, y: e.clientY - r.top };
+}
+
+canvas.addEventListener("pointerdown", (e) => {
+  if (rivelato) return;
+  disegnando = true;
+  canvas.setPointerCapture(e.pointerId);
+  const p = posizione(e);
+  ultimoPunto = p;
+  gratta(p.x, p.y, p.x, p.y);
+});
+
+canvas.addEventListener("pointermove", (e) => {
+  if (!disegnando || rivelato) return;
+  const p = posizione(e);
+  if (ultimoPunto) gratta(ultimoPunto.x, ultimoPunto.y, p.x, p.y);
+  ultimoPunto = p;
+
+  if (++contatoreControlli % 10 === 0 && percentualeGrattata() > SOGLIA_RIVELAZIONE){
+    rivelaTutto();
+  }
+});
+
+function fineTratto(){
+  if (!disegnando) return;
+  disegnando = false;
+  ultimoPunto = null;
+  if (!rivelato && percentualeGrattata() > SOGLIA_RIVELAZIONE) rivelaTutto();
+}
+canvas.addEventListener("pointerup", fineTratto);
+canvas.addEventListener("pointercancel", fineTratto);
+canvas.addEventListener("pointerleave", fineTratto);
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  rivelato = false;
+  disegnando = false;
+  ultimoPunto = null;
+  initCanvas();
+});
+
+window.addEventListener("load", initCanvas);
+
+let tResize;
+window.addEventListener("resize", () => {
+  clearTimeout(tResize);
+  tResize = setTimeout(() => {
+    if (!rivelato) initCanvas();
+  }, 200);
+});
+</script>
+</body>
+</html>
