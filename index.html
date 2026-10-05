@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tanti auguri patata! 🌸🐾</title>
+<title>Tanti auguri Blinky! 🌸🐾</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -265,12 +265,12 @@
 
 <header>
   <span class="ghirlanda">🌸 🌷 🐾 🌺 🌼 🐾 🌻 🌷 🌸</span>
-  <h1>Tanti auguri patata! <span class="patata">🥔</span>🌸</h1>
-  <p>Buon compleanno! Guarda il video e gratta la sorpresa per scoprire la foto nascosta. 🎁🐾</p>
+  <h1>Tanti auguri Blinky! <span class="patata">🥔</span>🌸</h1>
+  <p>Buon compleanno amorino mio! Guarda il video e gratta la sorpresa per scoprire quando ci rivedremo ihihih. 🎁🐾</p>
 </header>
 
 <section class="card">
-  <h2>🌸 Il tuo video</h2>
+  <h2>🌸</h2>
   <div class="video-wrap" id="videoWrap">
     <iframe
       id="ytFrame"
@@ -284,7 +284,7 @@
 </section>
 
 <section class="card">
-  <h2>🐾 Gratta e scopri la sorpresa</h2>
+  <h2>🐾 Gratta!!!</h2>
   <div class="scratch-wrap" id="scratchWrap">
     <img id="fotoNascosta"
          src="foto.png"
@@ -295,7 +295,7 @@
   <button class="btn" id="resetBtn">🔄 Ricomincia a grattare</button>
 </section>
 
-<p class="firma">Fatto con ❤️ e tante 🐾 per la patata più dolce del mondo 🥔🌸</p>
+<p class="firma">Tanti auguri ancora Blinkypop 🥔🌸</p>
 
 <script>
 /* =========================================================
@@ -416,7 +416,7 @@ function initCanvas(){
 
   ctx.font = `${fontSize}px "Pacifico", cursive`;
   ctx.fillStyle = "rgba(120,60,100,.45)";
-  ctx.fillText("Tanti auguri patata!", larghezzaCSS / 2 + 2, altezzaCSS / 2 + 2);
+  ctx.fillText("Tanti auguri Blinky!", larghezzaCSS / 2 + 2, altezzaCSS / 2 + 2);
 
   const tg = ctx.createLinearGradient(
     0, altezzaCSS / 2 - fontSize,
@@ -426,11 +426,11 @@ function initCanvas(){
   tg.addColorStop(0.5, "#b57edc");
   tg.addColorStop(1, "#7bc47f");
   ctx.fillStyle = tg;
-  ctx.fillText("Tanti auguri patata!", larghezzaCSS / 2, altezzaCSS / 2);
+  ctx.fillText("Tanti auguri Blinky!", larghezzaCSS / 2, altezzaCSS / 2);
 
   ctx.font = `600 ${fontSize * 0.55}px "Quicksand", sans-serif`;
   ctx.fillStyle = "rgba(120,60,100,.85)";
-  ctx.fillText("🌸 gratta qui 🐾", larghezzaCSS / 2, altezzaCSS / 2 + fontSize * 1.1);
+  ctx.fillText(" GRATTA QUI ", larghezzaCSS / 2, altezzaCSS / 2 + fontSize * 1.1);
 
   ctx.restore();
 
